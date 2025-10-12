@@ -76,7 +76,7 @@
 //        formatting changes to make it fit better in all cases, and many more
 //        small improvements in the Settings UI in preparation for a more
 //        radical UI refresh to use ImGui (in the next planned release).
-#define VERSION "1.2.1"
+#define VERSION "1.2.2"
 #define VERSION_BLANK "   "           /* to align multi-line log entries :-) */
 
 // define qualified name that include version (e.g., "BLU-fx v1.2")
@@ -1752,9 +1752,6 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
     XPLMDebugString(NAME_VERSION_BLANK "X-Plane.org forums), with the original plugin created by Matteo\n");
     XPLMDebugString(NAME_VERSION_BLANK "Hausner). From both of us: you're welcome!");
 #endif
-    
-    // prepare fragment-shader
-    InitShader(FRAGMENT_SHADER);
 
     // obtain datarefs
     cinemaVeriteDataRef = XPLMFindDataRef("sim/graphics/view/cinema_verite");
@@ -1780,6 +1777,44 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
 
     // read and apply config file
     LoadSettings();
+
+    return 1;
+}
+
+PLUGIN_API void XPluginStop(void)
+{
+    // save settings on exit to auto-restore on next startup
+    SaveSettings();
+}
+
+PLUGIN_API void XPluginDisable(void)
+{
+    UpdateRaleighScale(1);
+
+    CleanupShader(1);
+
+    // unregister own DataRef
+    XPLMUnregisterDataAccessor(overrideControlCinemaVeriteDataRef);
+
+    // unregister flight loop callbacks
+    XPLMUnregisterFlightLoopCallback(UpdateFakeWindowCallback, NULL);
+    if (fpsLimiterEnabled)
+        XPLMUnregisterFlightLoopCallback(LimiterFlightCallback, NULL);
+    if (controlCinemaVeriteEnabled)
+        XPLMUnregisterFlightLoopCallback(ControlCinemaVeriteCallback, NULL);
+
+    // unregister draw callbacks
+    if (postProcesssingEnabled)
+        XPLMUnregisterDrawCallback(PostProcessingCallback, xplm_Phase_Window, 1, NULL);
+    if (fpsLimiterEnabled)
+        XPLMUnregisterDrawCallback(LimiterDrawCallback, xplm_Phase_Terrain, 1, NULL);
+}
+
+PLUGIN_API int XPluginEnable(void)
+{
+    // prepare fragment-shader
+    // (Note: this was moved from XPluginStart() to minimize risk, especially in XP12.)
+    InitShader(FRAGMENT_SHADER);
 
     // create fake window
     XPLMCreateWindow_t fakeWindowParameters;
@@ -1811,40 +1846,6 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
     if (fpsLimiterEnabled)
         XPLMRegisterDrawCallback(LimiterDrawCallback, xplm_Phase_Terrain, 1, NULL);
 
-    return 1;
-}
-
-PLUGIN_API void XPluginStop(void)
-{
-    // save settings on exit to auto-restore on next startup
-    SaveSettings();
-    
-    CleanupShader(1);
-
-    // unregister own DataRef
-    XPLMUnregisterDataAccessor(overrideControlCinemaVeriteDataRef);
-
-    // unregister flight loop callbacks
-    XPLMUnregisterFlightLoopCallback(UpdateFakeWindowCallback, NULL);
-    if (fpsLimiterEnabled)
-        XPLMUnregisterFlightLoopCallback(LimiterFlightCallback, NULL);
-    if (controlCinemaVeriteEnabled)
-        XPLMUnregisterFlightLoopCallback(ControlCinemaVeriteCallback, NULL);
-
-    // unregister draw callbacks
-    if (postProcesssingEnabled)
-        XPLMUnregisterDrawCallback(PostProcessingCallback, xplm_Phase_Window, 1, NULL);
-    if (fpsLimiterEnabled)
-        XPLMUnregisterDrawCallback(LimiterDrawCallback, xplm_Phase_Terrain, 1, NULL);
-}
-
-PLUGIN_API void XPluginDisable(void)
-{
-    UpdateRaleighScale(1);
-}
-
-PLUGIN_API int XPluginEnable(void)
-{
     return 1;
 }
 
