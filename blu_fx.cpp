@@ -76,7 +76,7 @@
 //        formatting changes to make it fit better in all cases, and many more
 //        small improvements in the Settings UI in preparation for a more
 //        radical UI refresh to use ImGui (in the next planned release).
-#define VERSION "1.2.2"
+#define VERSION "1.2.3"
 #define VERSION_BLANK "   "           /* to align multi-line log entries :-) */
 
 // define qualified name that include version (e.g., "BLU-fx v1.2")
@@ -509,6 +509,7 @@ BLUfxPreset BLUfxPresets [PRESET_MAX] =
 // macros for version number relation functionality (i.e., "legacy" or not)
 static int xplmVersionNum = 0;							// filled in at startup
 #define IS_XP12         (xplmVersionNum >= 120000)
+#define IS_XP12_1_4		(xplmVersionNum >= 120104)
 #define LEGACY_FEATURES (!IS_XP12)
 
 // global settings variables
@@ -542,11 +543,12 @@ static float startTimeFlight = 0.0f, endTimeFlight = 0.0f, startTimeDraw = 0.0f,
 static XPLMWindowID fakeWindow = NULL;
 
 // global dataref variables
-static XPLMDataRef cinemaVeriteDataRef = NULL, viewTypeDataRef = NULL, raleighScaleDataRef = NULL, overrideControlCinemaVeriteDataRef = NULL, ignitionKeyDataRef = NULL;
-static XPLMDataRef xplmVersionDataRef = XPLMFindDataRef("sim/version/xplane_internal_version");
+static XPLMDataRef cinemaVeriteDataRef = NULL, viewTypeDataRef = NULL, raleighScaleDataRef = NULL, overrideControlCinemaVeriteDataRef = NULL;
+static XPLMDataRef xplmVersionDataRef = NULL;
 
 // global widget variables
 static XPWidgetID settingsWidget = NULL, postProcessingCheckbox = NULL, fpsLimiterCheckbox = NULL, controlCinemaVeriteCheckbox = NULL, brightnessCaption = NULL, contrastCaption = NULL, saturationCaption = NULL, redScaleCaption = NULL, greenScaleCaption = NULL, blueScaleCaption = NULL, redOffsetCaption = NULL, greenOffsetCaption = NULL, blueOffsetCaption = NULL, vignetteCaption = NULL, raleighScaleCaption = NULL, maxFpsCaption = NULL, disableCinemaVeriteTimeCaption, brightnessSlider = NULL, contrastSlider = NULL, saturationSlider = NULL, redScaleSlider = NULL, greenScaleSlider = NULL, blueScaleSlider = NULL, redOffsetSlider = NULL, greenOffsetSlider = NULL, blueOffsetSlider = NULL, vignetteSlider = NULL, raleighScaleSlider = NULL, maxFpsSlider = NULL, disableCinemaVeriteTimeSlider = NULL, presetButtons[PRESET_MAX] = {NULL}, resetRaleighScaleButton = NULL, saveButton = NULL, loadButton = NULL;
+
 
 // draw-callback that adds post-processing
 static int PostProcessingCallback(XPLMDrawingPhase inPhase, int inIsBefore, void *inRefcon)
@@ -761,7 +763,9 @@ static float ControlCinemaVeriteCallback(float inElapsedSinceLastCall, float inE
 	// TODO: UPDATE THIS TO WORK CORRECTLY IN XP12+ (i.e., use "split datarefs" in XPLM4 world for interior vs. exterior cinema verite equivalents)
     if (controlCinemaVeriteEnabled && !overrideControlCinemaVerite)
     {
-        if (XPLMGetDatai(viewTypeDataRef) == 1026) // 3D Cockpit
+		if (cinemaVeriteDataRef == NULL)
+			;	// DO NOTHING if we're in a newer version of X-Plane (v12.1.4+)	// TODO: possibly log an error or give a one-time warning to user...
+		else if (XPLMGetDatai(viewTypeDataRef) == 1026) // 3D Cockpit
         {
             float elapsedTime = XPLMGetElapsedTime() - lastMouseUsageTime;
 
@@ -943,7 +947,6 @@ static void UpdateSettingsWidgets(void)
 	// Disable the currently-selected preset, if any, including the "reset" button for the default preset,
 	// and the "restore" or "load .ini" buttons for the current "user" preset:
 	// (Note: we'd prefer to highlight the button, but I can't figure that out.)
-	int i;
 	for (int i = 0; i < PRESET_MAX; i++) {
 		bool isActive = isActivePreset(&BLUfxPresets[i]);
 		XPSetWidgetProperty(presetButtons[i], xpProperty_Enabled, (isActive ? 0 : 1));	// disable only the ACTIVE preset
@@ -1207,8 +1210,10 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             // get screen bounds:
             int screenLeft = 0, screenTop = 0, screenRight = 0, screenBottom = 0;
             XPLMGetScreenBoundsGlobal(&screenLeft, &screenTop, &screenRight, &screenBottom);
-            int screenWidth = (screenRight - screenLeft);
-            int screenHeight = (screenTop - screenBottom);
+			
+			// get screen width/height if we need it later: (currently commented out)
+            //int screenWidth = (screenRight - screenLeft);
+            //int screenHeight = (screenTop - screenBottom);
 
             y = screenTop - 30;     // start near the top, but give some space
 
@@ -1730,6 +1735,7 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
     XPLMEnableFeature("XPLM_USE_NATIVE_WIDGET_WINDOWS", 1);	// depends on XPLM301+
     
     // Get version of X-Plane:
+	xplmVersionDataRef = XPLMFindDataRef("sim/version/xplane_internal_version");
     xplmVersionNum = XPLMGetDatai(xplmVersionDataRef);
     XPLMDebugString(NAME_VERSION ": Initializing " NAME_LOWERCASE " plugin (v" VERSION ", 64-bit):\n");
     XPLMDebugString(NAME_VERSION_BLANK "This updated version supports modern graphics drivers for both\n");
@@ -1754,7 +1760,9 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
 #endif
 
     // obtain datarefs
-    cinemaVeriteDataRef = XPLMFindDataRef("sim/graphics/view/cinema_verite");
+	if (!IS_XP12_1_4)
+		cinemaVeriteDataRef = XPLMFindDataRef("sim/graphics/view/cinema_verite");
+	
     viewTypeDataRef = XPLMFindDataRef("sim/graphics/view/view_type");
 //    ignitionKeyDataRef = XPLMFindDataRef("sim/cockpit2/engine/actuators/ignition_key");	// no longer used
 
