@@ -119,6 +119,18 @@ enum BLUfxPresets_t
     PRESET_VINTAGE_FILM,
     PRESET_COLORLESS,
     PRESET_MONOCHROME,
+    PRESET_CINEMATIC_DRAMA,
+    PRESET_WARM_SUNSET,
+    PRESET_COOL_EVENING,
+    PRESET_RAINY_DAY,
+    PRESET_SNOWY_PEAKS,
+    PRESET_STORM_BREWING,
+    PRESET_HAZY_AFTERNOON,
+    PRESET_NOIR_MYSTERY,
+    PRESET_CYBERPUNK_NEON,
+    PRESET_SOFT_PHOTOGRAPHY,
+    PRESET_DRAMATIC_CONTRAST,
+    PRESET_GOLDEN_HOUR,
     PRESET_MAX
 };
 
@@ -463,6 +475,198 @@ BLUfxPreset BLUfxPresets [PRESET_MAX] =
         0.03f, // green offset
         0.0f, // blue offset
         0.7f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_CINEMATIC_DRAMA
+    {
+        -0.15f, // brightness
+        1.6f, // contrast
+        1.1f, // saturation
+        0.95f, // red scale
+        0.90f, // green scale
+        1.15f, // blue scale
+        -0.05f, // red offset
+        0.0f, // green offset
+        0.15f, // blue offset
+        0.75f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_WARM_SUNSET
+    {
+        0.15f, // brightness
+        1.2f, // contrast
+        1.3f, // saturation
+        1.35f, // red scale
+        1.10f, // green scale
+        0.75f, // blue scale
+        0.15f, // red offset
+        0.05f, // green offset
+        -0.25f, // blue offset
+        0.60f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_COOL_EVENING
+    {
+        0.0f, // brightness
+        1.3f, // contrast
+        1.0f, // saturation
+        0.85f, // red scale
+        0.90f, // green scale
+        1.25f, // blue scale
+        -0.15f, // red offset
+        0.0f, // green offset
+        0.25f, // blue offset
+        0.70f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_RAINY_DAY
+    {
+        -0.20f, // brightness
+        0.9f, // contrast
+        0.6f, // saturation
+        0.90f, // red scale
+        0.92f, // green scale
+        1.10f, // blue scale
+        -0.10f, // red offset
+        -0.05f, // green offset
+        0.20f, // blue offset
+        0.85f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_SNOWY_PEAKS
+    {
+        0.20f, // brightness
+        1.35f, // contrast
+        0.8f, // saturation
+        0.95f, // red scale
+        1.05f, // green scale
+        1.25f, // blue scale
+        0.10f, // red offset
+        0.10f, // green offset
+        0.25f, // blue offset
+        0.50f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_STORM_BREWING
+    {
+        -0.25f, // brightness
+        1.5f, // contrast
+        0.7f, // saturation
+        0.9f, // red scale
+        0.88f, // green scale
+        1.05f, // blue scale
+        -0.15f, // red offset
+        -0.10f, // green offset
+        0.10f, // blue offset
+        0.80f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_HAZY_AFTERNOON
+    {
+        0.10f, // brightness
+        0.95f, // contrast
+        1.2f, // saturation
+        1.05f, // red scale
+        1.00f, // green scale
+        0.95f, // blue scale
+        0.10f, // red offset
+        0.05f, // green offset
+        0.0f, // blue offset
+        0.55f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_NOIR_MYSTERY
+    {
+        -0.30f, // brightness
+        1.8f, // contrast
+        0.0f, // saturation
+        1.0f, // red scale
+        1.0f, // green scale
+        1.0f, // blue scale
+        0.0f, // red offset
+        0.0f, // green offset
+        0.0f, // blue offset
+        0.85f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_CYBERPUNK_NEON
+    {
+        0.05f, // brightness
+        1.4f, // contrast
+        1.8f, // saturation
+        1.20f, // red scale
+        1.30f, // green scale
+        1.10f, // blue scale
+        0.20f, // red offset
+        0.25f, // green offset
+        0.15f, // blue offset
+        0.40f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_SOFT_PHOTOGRAPHY
+    {
+        0.08f, // brightness
+        0.90f, // contrast
+        1.15f, // saturation
+        1.05f, // red scale
+        1.02f, // green scale
+        0.98f, // blue scale
+        0.05f, // red offset
+        0.05f, // green offset
+        0.0f, // blue offset
+        0.35f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_DRAMATIC_CONTRAST
+    {
+        -0.10f, // brightness
+        1.7f, // contrast
+        1.25f, // saturation
+        1.10f, // red scale
+        1.05f, // green scale
+        0.95f, // blue scale
+        0.10f, // red offset
+        0.0f, // green offset
+        -0.15f, // blue offset
+        0.65f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_GOLDEN_HOUR
+    {
+        0.12f, // brightness
+        1.15f, // contrast
+        1.4f, // saturation
+        1.40f, // red scale
+        1.18f, // green scale
+        0.70f, // blue scale
+        0.18f, // red offset
+        0.10f, // green offset
+        -0.30f, // blue offset
+        0.55f, // vignette
         DEFAULT_RALEIGH_SCALE, // raleigh scale
         DEFAULT_MAX_FRAME_RATE, // default frame rate
         DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
