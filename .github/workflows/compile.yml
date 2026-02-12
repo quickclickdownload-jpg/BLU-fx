@@ -1,0 +1,40 @@
+name: Compile BLU-fx for Windows
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install MinGW and build tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake ninja-build mingw-w64 g++-mingw-w64
+    
+    - name: Create build directory
+      run: mkdir -p build-win
+    
+    - name: Configure CMake (Windows Cross-compile)
+      run: |
+        cd build-win
+        cmake -G Ninja \
+          -DCMAKE_TOOLCHAIN_FILE=../Toolchain-mingw-w64-x86-64.cmake \
+          ..
+    
+    - name: Build Windows binary
+      run: |
+        cd build-win
+        ninja -v
+    
+    - name: Upload Windows binary artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-binary
+        path: build-win/blu_fx.xpl
+        retention-days: 30
