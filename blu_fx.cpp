@@ -1409,7 +1409,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
         if (settingsWidget == NULL)
         {
             // create settings widget
-            int x = 10, y = 0, w = 370, h = 783;
+            int x = 10, y = 0, w = 370, h = 900;
             
             // get screen bounds:
             int screenLeft = 0, screenTop = 0, screenRight = 0, screenBottom = 0;
@@ -1724,12 +1724,88 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             presetButtons[PRESET_MONOCHROME] = XPCreateWidget(x2 - 20 - 125, y - 560, x2 - 20, y - 575, 1, "Monochrome", 0, settingsWidget, xpWidgetClass_Button);
             XPSetWidgetProperty(presetButtons[PRESET_MONOCHROME], xpProperty_ButtonType, xpPushButton);
 
+            // third preset button column (new presets)
+            
+            y = top;
+            
+            // add cinematic drama preset button
+            int x_col3 = x + 250;  // third column offset
+            int x_col3_end = x_col3 + 125;
+            
+            presetButtons[PRESET_CINEMATIC_DRAMA] = XPCreateWidget(x_col3, y - 360, x_col3_end, y - 375, 1, "Cinematic Drama", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_CINEMATIC_DRAMA], xpProperty_ButtonType, xpPushButton);
+            y += 2;
+            
+            // add warm sunset preset button
+            presetButtons[PRESET_WARM_SUNSET] = XPCreateWidget(x_col3, y - 385, x_col3_end, y - 400, 1, "Warm Sunset", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_WARM_SUNSET], xpProperty_ButtonType, xpPushButton);
+            y += 2;
+            
+            // add cool evening preset button
+            presetButtons[PRESET_COOL_EVENING] = XPCreateWidget(x_col3, y - 410, x_col3_end, y - 425, 1, "Cool Evening", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_COOL_EVENING], xpProperty_ButtonType, xpPushButton);
+            y += 2;
+            
+            // add rainy day preset button
+            presetButtons[PRESET_RAINY_DAY] = XPCreateWidget(x_col3, y - 435, x_col3_end, y - 450, 1, "Rainy Day", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_RAINY_DAY], xpProperty_ButtonType, xpPushButton);
+            y += 2;
+            
+            // add snowy peaks preset button
+            presetButtons[PRESET_SNOWY_PEAKS] = XPCreateWidget(x_col3, y - 460, x_col3_end, y - 475, 1, "Snowy Peaks", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_SNOWY_PEAKS], xpProperty_ButtonType, xpPushButton);
+            y += 2;
+            
+            // add storm brewing preset button
+            presetButtons[PRESET_STORM_BREWING] = XPCreateWidget(x_col3, y - 485, x_col3_end, y - 500, 1, "Storm Brewing", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_STORM_BREWING], xpProperty_ButtonType, xpPushButton);
+            y += 2;
+            
+            // add hazy afternoon preset button
+            presetButtons[PRESET_HAZY_AFTERNOON] = XPCreateWidget(x_col3, y - 510, x_col3_end, y - 525, 1, "Hazy Afternoon", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_HAZY_AFTERNOON], xpProperty_ButtonType, xpPushButton);
+            y += 2;
+            
+            // add noir mystery preset button
+            presetButtons[PRESET_NOIR_MYSTERY] = XPCreateWidget(x_col3, y - 535, x_col3_end, y - 550, 1, "Noir Mystery", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_NOIR_MYSTERY], xpProperty_ButtonType, xpPushButton);
+            y += 2;
+            
+            // add cyberpunk neon preset button
+            presetButtons[PRESET_CYBERPUNK_NEON] = XPCreateWidget(x_col3, y - 560, x_col3_end, y - 575, 1, "Cyberpunk Neon", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_CYBERPUNK_NEON], xpProperty_ButtonType, xpPushButton);
+
             x -= BUTTON_INSET; x2 += BUTTON_INSET;  // re-expand to normal width as we continue
             y = top + 30;
 
             // Restore left/right margin from whole section above:
             x -= 3;
             x2 += 3;
+            
+            // additional presets section for remaining new presets
+            y += 80;  // add spacing below the three-column preset grid
+            
+            XPCreateWidget(x + 10, y - 330, x2 - 10, y - 380 - 10, 1, "Additional Presets:", 0, settingsWidget, xpWidgetClass_SubWindow);
+            
+            // add small left/right margin for inner content
+            x += 5;
+            x2 -= 5;
+            
+            // add soft photography preset button
+            presetButtons[PRESET_SOFT_PHOTOGRAPHY] = XPCreateWidget(x + 20, y - 360, x + 20 + 125, y - 375, 1, "Soft Photography", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_SOFT_PHOTOGRAPHY], xpProperty_ButtonType, xpPushButton);
+            
+            // add dramatic contrast preset button
+            presetButtons[PRESET_DRAMATIC_CONTRAST] = XPCreateWidget(x2 - 20 - 125, y - 360, x2 - 20, y - 375, 1, "Dramatic Contrast", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_DRAMATIC_CONTRAST], xpProperty_ButtonType, xpPushButton);
+            
+            // add golden hour preset button (centered below)
+            presetButtons[PRESET_GOLDEN_HOUR] = XPCreateWidget(x + 75, y - 390, x + 75 + 125, y - 405, 1, "Golden Hour", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_GOLDEN_HOUR], xpProperty_ButtonType, xpPushButton);
+            
+            // restore margin
+            x -= 5;
+            x2 += 5;
 
             // Only show raleigh scale slider in versions prior to XP12:
             if (LEGACY_FEATURES) {
