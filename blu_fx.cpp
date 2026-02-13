@@ -119,18 +119,18 @@ enum BLUfxPresets_t
     PRESET_VINTAGE_FILM,
     PRESET_COLORLESS,
     PRESET_MONOCHROME,
-    PRESET_CLARITY_BOOST,
-    PRESET_VIBRANT_COLORS,
-    PRESET_SKY_ENHANCED,
-    PRESET_CONTRAST_PLUS,
-    PRESET_WARM_LIGHT,
-    PRESET_COOL_FRESH,
-    PRESET_NIGHT_FLIGHT,
-    PRESET_PROFESSIONAL,
-    PRESET_BRIGHT_CLEAR,
-    PRESET_COLOR_POP,
-    PRESET_FILM_LOOK,
-    PRESET_GAMING_MODE,
+    PRESET_CLEAR_DAY,
+    PRESET_HAZY_HUMID,
+    PRESET_OVERCAST,
+    PRESET_BRIGHT_MORNING,
+    PRESET_GOLDEN_HOUR,
+    PRESET_SOFT_WARM,
+    PRESET_COOL_DAY,
+    PRESET_HIGH_ALTITUDE,
+    PRESET_EVENING_LIGHT,
+    PRESET_ENHANCED_CLEAR,
+    PRESET_NATURAL_PLUS,
+    PRESET_EVENING_GLOW,
     PRESET_MAX
 };
 
@@ -479,122 +479,26 @@ BLUfxPreset BLUfxPresets [PRESET_MAX] =
         DEFAULT_MAX_FRAME_RATE, // default frame rate
         DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
     },
-    // PRESET_CINEMATIC_DRAMA -> PRESET_CLARITY_BOOST
+    // PRESET_CINEMATIC_DRAMA -> PRESET_CLEAR_DAY
     {
-        0.08f, // brightness
-        1.50f, // contrast
-        1.10f, // saturation
+        0.05f, // brightness
+        1.10f, // contrast
+        1.05f, // saturation
         1.00f, // red scale
         1.00f, // green scale
         1.00f, // blue scale
         0.0f, // red offset
         0.0f, // green offset
         0.0f, // blue offset
-        0.15f, // vignette
+        0.15f, // vignette - minimal
         DEFAULT_RALEIGH_SCALE, // raleigh scale
         DEFAULT_MAX_FRAME_RATE, // default frame rate
         DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
     },
-    // PRESET_VIBRANT_COLORS
+    // PRESET_HAZY_HUMID
     {
-        0.05f, // brightness
-        1.35f, // contrast
-        1.40f, // saturation
-        1.05f, // red scale
-        1.05f, // green scale
-        1.05f, // blue scale
-        0.0f, // red offset
-        0.0f, // green offset
-        0.0f, // blue offset
-        0.20f, // vignette
-        DEFAULT_RALEIGH_SCALE, // raleigh scale
-        DEFAULT_MAX_FRAME_RATE, // default frame rate
-        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
-    },
-    // PRESET_SKY_ENHANCED
-    {
-        0.10f, // brightness
-        1.30f, // contrast
-        1.20f, // saturation
-        1.00f, // red scale
-        1.05f, // green scale
-        1.15f, // blue scale - boost sky
-        0.0f, // red offset
-        0.0f, // green offset
-        0.05f, // blue offset
-        0.15f, // vignette
-        DEFAULT_RALEIGH_SCALE, // raleigh scale
-        DEFAULT_MAX_FRAME_RATE, // default frame rate
-        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
-    },
-    // PRESET_CONTRAST_PLUS
-    {
-        0.0f, // brightness
-        1.65f, // contrast
-        1.25f, // saturation
-        1.05f, // red scale
-        1.05f, // green scale
-        1.05f, // blue scale
-        0.0f, // red offset
-        0.0f, // green offset
-        0.0f, // blue offset
-        0.25f, // vignette
-        DEFAULT_RALEIGH_SCALE, // raleigh scale
-        DEFAULT_MAX_FRAME_RATE, // default frame rate
-        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
-    },
-    // PRESET_WARM_LIGHT
-    {
-        0.10f, // brightness
-        1.25f, // contrast
-        1.15f, // saturation
-        1.10f, // red scale
-        1.05f, // green scale
-        0.90f, // blue scale
-        0.05f, // red offset
-        0.02f, // green offset
-        -0.10f, // blue offset
-        0.20f, // vignette
-        DEFAULT_RALEIGH_SCALE, // raleigh scale
-        DEFAULT_MAX_FRAME_RATE, // default frame rate
-        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
-    },
-    // PRESET_COOL_FRESH
-    {
-        0.05f, // brightness
-        1.40f, // contrast
-        1.05f, // saturation
-        0.95f, // red scale
-        1.00f, // green scale
-        1.10f, // blue scale
-        -0.05f, // red offset
-        0.0f, // green offset
-        0.05f, // blue offset
-        0.15f, // vignette
-        DEFAULT_RALEIGH_SCALE, // raleigh scale
-        DEFAULT_MAX_FRAME_RATE, // default frame rate
-        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
-    },
-    // PRESET_NIGHT_FLIGHT
-    {
-        -0.05f, // brightness
-        1.50f, // contrast
-        1.05f, // saturation
-        1.00f, // red scale
-        1.00f, // green scale
-        1.05f, // blue scale
-        0.0f, // red offset
-        0.0f, // green offset
-        0.02f, // blue offset
-        0.10f, // vignette - minimal for night
-        DEFAULT_RALEIGH_SCALE, // raleigh scale
-        DEFAULT_MAX_FRAME_RATE, // default frame rate
-        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
-    },
-    // PRESET_PROFESSIONAL
-    {
-        0.02f, // brightness
-        1.20f, // contrast
+        0.08f, // brightness
+        1.05f, // contrast - slightly soft
         1.00f, // saturation
         1.00f, // red scale
         1.00f, // green scale
@@ -602,15 +506,127 @@ BLUfxPreset BLUfxPresets [PRESET_MAX] =
         0.0f, // red offset
         0.0f, // green offset
         0.0f, // blue offset
+        0.20f, // vignette - subtle
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_OVERCAST
+    {
+        0.10f, // brightness - brighter in overcast
+        1.15f, // contrast - slightly enhanced
+        1.00f, // saturation
+        1.00f, // red scale
+        1.00f, // green scale
+        1.00f, // blue scale
+        0.0f, // red offset
+        0.0f, // green offset
+        0.0f, // blue offset
+        0.10f, // vignette - minimal
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_BRIGHT_MORNING
+    {
+        0.12f, // brightness - morning light
+        1.20f, // contrast
+        1.08f, // saturation - slightly more vivid
+        1.00f, // red scale
+        1.00f, // green scale
+        1.00f, // blue scale
+        0.0f, // red offset
+        0.0f, // green offset
+        0.0f, // blue offset
+        0.15f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_GOLDEN_HOUR
+    {
+        0.08f, // brightness
+        1.15f, // contrast
+        1.12f, // saturation
+        1.08f, // red scale - warm
+        1.04f, // green scale
+        0.92f, // blue scale - reduce blue
+        0.05f, // red offset
+        0.02f, // green offset
+        -0.08f, // blue offset
         0.20f, // vignette
         DEFAULT_RALEIGH_SCALE, // raleigh scale
         DEFAULT_MAX_FRAME_RATE, // default frame rate
         DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
     },
-    // PRESET_BRIGHT_CLEAR
+    // PRESET_SOFT_WARM
     {
-        0.15f, // brightness
-        1.55f, // contrast
+        0.08f, // brightness
+        1.08f, // contrast - soft
+        1.05f, // saturation
+        1.05f, // red scale
+        1.02f, // green scale
+        0.98f, // blue scale
+        0.02f, // red offset
+        0.01f, // green offset
+        -0.02f, // blue offset
+        0.20f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_COOL_DAY
+    {
+        0.05f, // brightness
+        1.15f, // contrast
+        1.00f, // saturation
+        0.98f, // red scale - reduce red
+        1.00f, // green scale
+        1.05f, // blue scale - enhance blue
+        -0.02f, // red offset
+        0.0f, // green offset
+        0.03f, // blue offset
+        0.15f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_HIGH_ALTITUDE
+    {
+        0.15f, // brightness - very bright at altitude
+        1.25f, // contrast
+        1.10f, // saturation
+        1.00f, // red scale
+        1.00f, // green scale
+        1.00f, // blue scale
+        0.0f, // red offset
+        0.0f, // green offset
+        0.0f, // blue offset
+        0.10f, // vignette - very minimal
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_EVENING_LIGHT
+    {
+        0.02f, // brightness - dimmer
+        1.20f, // contrast
+        1.08f, // saturation
+        1.06f, // red scale - warm evening
+        1.02f, // green scale
+        0.95f, // blue scale - reduce blue
+        0.04f, // red offset
+        0.01f, // green offset
+        -0.06f, // blue offset
+        0.25f, // vignette
+        DEFAULT_RALEIGH_SCALE, // raleigh scale
+        DEFAULT_MAX_FRAME_RATE, // default frame rate
+        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
+    },
+    // PRESET_ENHANCED_CLEAR
+    {
+        0.08f, // brightness
+        1.30f, // contrast
         1.15f, // saturation
         1.02f, // red scale
         1.02f, // green scale
@@ -623,50 +639,34 @@ BLUfxPreset BLUfxPresets [PRESET_MAX] =
         DEFAULT_MAX_FRAME_RATE, // default frame rate
         DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
     },
-    // PRESET_COLOR_POP
+    // PRESET_NATURAL_PLUS
     {
-        0.08f, // brightness
-        1.40f, // contrast
-        1.50f, // saturation
-        1.08f, // red scale
-        1.08f, // green scale
-        1.08f, // blue scale
-        0.02f, // red offset
-        0.02f, // green offset
-        0.02f, // blue offset
-        0.20f, // vignette
+        0.03f, // brightness
+        1.12f, // contrast - subtle
+        1.08f, // saturation - just a bit more
+        1.00f, // red scale
+        1.00f, // green scale
+        1.00f, // blue scale
+        0.0f, // red offset
+        0.0f, // green offset
+        0.0f, // blue offset
+        0.15f, // vignette
         DEFAULT_RALEIGH_SCALE, // raleigh scale
         DEFAULT_MAX_FRAME_RATE, // default frame rate
         DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
     },
-    // PRESET_FILM_LOOK
+    // PRESET_EVENING_GLOW
     {
-        -0.02f, // brightness
-        1.35f, // contrast
+        0.05f, // brightness
+        1.18f, // contrast
         1.10f, // saturation
-        1.02f, // red scale
-        1.02f, // green scale
-        1.02f, // blue scale
-        0.0f, // red offset
-        0.0f, // green offset
-        0.0f, // blue offset
-        0.30f, // vignette
-        DEFAULT_RALEIGH_SCALE, // raleigh scale
-        DEFAULT_MAX_FRAME_RATE, // default frame rate
-        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
-    },
-    // PRESET_GAMING_MODE
-    {
-        0.12f, // brightness - bright for gameplay
-        1.45f, // contrast - good visibility
-        1.30f, // saturation - vivid colors
-        1.05f, // red scale
-        1.05f, // green scale
-        1.05f, // blue scale
-        0.0f, // red offset
-        0.0f, // green offset
-        0.0f, // blue offset
-        0.15f, // vignette - minimal
+        1.08f, // red scale - warm
+        1.03f, // green scale
+        0.93f, // blue scale
+        0.06f, // red offset
+        0.02f, // green offset
+        -0.10f, // blue offset
+        0.25f, // vignette
         DEFAULT_RALEIGH_SCALE, // raleigh scale
         DEFAULT_MAX_FRAME_RATE, // default frame rate
         DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
@@ -1409,7 +1409,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
         if (settingsWidget == NULL)
         {
             // create settings widget
-            int x = 10, y = 0, w = 580, h = 900;
+            int x = 10, y = 0, w = 580, h = 1050;
             
             // get screen bounds:
             int screenLeft = 0, screenTop = 0, screenRight = 0, screenBottom = 0;
@@ -1728,52 +1728,52 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             
             y = top;
             
-            // add clarity boost preset button
+            // add clear day preset button
             int x_col3 = x + 165;  // third column offset (middle column)
             int x_col3_end = x_col3 + 125;
             
-            presetButtons[PRESET_CLARITY_BOOST] = XPCreateWidget(x_col3, y - 360, x_col3_end, y - 375, 1, "Clarity Boost", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_CLARITY_BOOST], xpProperty_ButtonType, xpPushButton);
+            presetButtons[PRESET_CLEAR_DAY] = XPCreateWidget(x_col3, y - 360, x_col3_end, y - 375, 1, "Clear Day", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_CLEAR_DAY], xpProperty_ButtonType, xpPushButton);
             y += 2;
             
-            // add vibrant colors preset button
-            presetButtons[PRESET_VIBRANT_COLORS] = XPCreateWidget(x_col3, y - 385, x_col3_end, y - 400, 1, "Vibrant Colors", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_VIBRANT_COLORS], xpProperty_ButtonType, xpPushButton);
+            // add hazy humid preset button
+            presetButtons[PRESET_HAZY_HUMID] = XPCreateWidget(x_col3, y - 385, x_col3_end, y - 400, 1, "Hazy Humid", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_HAZY_HUMID], xpProperty_ButtonType, xpPushButton);
             y += 2;
             
-            // add sky enhanced preset button
-            presetButtons[PRESET_SKY_ENHANCED] = XPCreateWidget(x_col3, y - 410, x_col3_end, y - 425, 1, "Sky Enhanced", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_SKY_ENHANCED], xpProperty_ButtonType, xpPushButton);
+            // add overcast preset button
+            presetButtons[PRESET_OVERCAST] = XPCreateWidget(x_col3, y - 410, x_col3_end, y - 425, 1, "Overcast", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_OVERCAST], xpProperty_ButtonType, xpPushButton);
             y += 2;
             
-            // add contrast plus preset button
-            presetButtons[PRESET_CONTRAST_PLUS] = XPCreateWidget(x_col3, y - 435, x_col3_end, y - 450, 1, "Contrast Plus", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_CONTRAST_PLUS], xpProperty_ButtonType, xpPushButton);
+            // add bright morning preset button
+            presetButtons[PRESET_BRIGHT_MORNING] = XPCreateWidget(x_col3, y - 435, x_col3_end, y - 450, 1, "Bright Morning", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_BRIGHT_MORNING], xpProperty_ButtonType, xpPushButton);
             y += 2;
             
-            // add warm light preset button
-            presetButtons[PRESET_WARM_LIGHT] = XPCreateWidget(x_col3, y - 460, x_col3_end, y - 475, 1, "Warm Light", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_WARM_LIGHT], xpProperty_ButtonType, xpPushButton);
+            // add golden hour preset button
+            presetButtons[PRESET_GOLDEN_HOUR] = XPCreateWidget(x_col3, y - 460, x_col3_end, y - 475, 1, "Golden Hour", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_GOLDEN_HOUR], xpProperty_ButtonType, xpPushButton);
             y += 2;
             
-            // add cool fresh preset button
-            presetButtons[PRESET_COOL_FRESH] = XPCreateWidget(x_col3, y - 485, x_col3_end, y - 500, 1, "Cool Fresh", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_COOL_FRESH], xpProperty_ButtonType, xpPushButton);
+            // add soft warm preset button
+            presetButtons[PRESET_SOFT_WARM] = XPCreateWidget(x_col3, y - 485, x_col3_end, y - 500, 1, "Soft Warm", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_SOFT_WARM], xpProperty_ButtonType, xpPushButton);
             y += 2;
             
-            // add night flight preset button
-            presetButtons[PRESET_NIGHT_FLIGHT] = XPCreateWidget(x_col3, y - 510, x_col3_end, y - 525, 1, "Night Flight", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_NIGHT_FLIGHT], xpProperty_ButtonType, xpPushButton);
+            // add cool day preset button
+            presetButtons[PRESET_COOL_DAY] = XPCreateWidget(x_col3, y - 510, x_col3_end, y - 525, 1, "Cool Day", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_COOL_DAY], xpProperty_ButtonType, xpPushButton);
             y += 2;
             
-            // add professional preset button
-            presetButtons[PRESET_PROFESSIONAL] = XPCreateWidget(x_col3, y - 535, x_col3_end, y - 550, 1, "Professional", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_PROFESSIONAL], xpProperty_ButtonType, xpPushButton);
+            // add high altitude preset button
+            presetButtons[PRESET_HIGH_ALTITUDE] = XPCreateWidget(x_col3, y - 535, x_col3_end, y - 550, 1, "High Altitude", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_HIGH_ALTITUDE], xpProperty_ButtonType, xpPushButton);
             y += 2;
             
-            // add bright clear preset button
-            presetButtons[PRESET_BRIGHT_CLEAR] = XPCreateWidget(x_col3, y - 560, x_col3_end, y - 575, 1, "Bright Clear", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_BRIGHT_CLEAR], xpProperty_ButtonType, xpPushButton);
+            // add evening light preset button
+            presetButtons[PRESET_EVENING_LIGHT] = XPCreateWidget(x_col3, y - 560, x_col3_end, y - 575, 1, "Evening Light", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_EVENING_LIGHT], xpProperty_ButtonType, xpPushButton);
 
             x -= BUTTON_INSET; x2 += BUTTON_INSET;  // re-expand to normal width as we continue
             y = top + 30;
@@ -1783,7 +1783,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             x2 += 3;
             
             // additional presets section for remaining new presets
-            y += 80;  // add spacing below the three-column preset grid
+            y += 120;  // increased spacing below the three-column preset grid to prevent overlap
             
             XPCreateWidget(x + 10, y - 330, x2 - 10, y - 380 - 10, 1, "Additional Presets:", 0, settingsWidget, xpWidgetClass_SubWindow);
             
@@ -1791,17 +1791,17 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             x += 5;
             x2 -= 5;
             
-            // add color pop preset button
-            presetButtons[PRESET_COLOR_POP] = XPCreateWidget(x + 20, y - 360, x + 20 + 125, y - 375, 1, "Color Pop", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_COLOR_POP], xpProperty_ButtonType, xpPushButton);
+            // add enhanced clear preset button
+            presetButtons[PRESET_ENHANCED_CLEAR] = XPCreateWidget(x + 20, y - 360, x + 20 + 125, y - 375, 1, "Enhanced Clear", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_ENHANCED_CLEAR], xpProperty_ButtonType, xpPushButton);
             
-            // add film look preset button
-            presetButtons[PRESET_FILM_LOOK] = XPCreateWidget(x2 - 20 - 125, y - 360, x2 - 20, y - 375, 1, "Film Look", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_FILM_LOOK], xpProperty_ButtonType, xpPushButton);
+            // add natural plus preset button
+            presetButtons[PRESET_NATURAL_PLUS] = XPCreateWidget(x2 - 20 - 125, y - 360, x2 - 20, y - 375, 1, "Natural Plus", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_NATURAL_PLUS], xpProperty_ButtonType, xpPushButton);
             
-            // add gaming mode preset button (centered below)
-            presetButtons[PRESET_GAMING_MODE] = XPCreateWidget(x + 75, y - 390, x + 75 + 125, y - 405, 1, "Gaming Mode", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_GAMING_MODE], xpProperty_ButtonType, xpPushButton);
+            // add evening glow preset button (centered below)
+            presetButtons[PRESET_EVENING_GLOW] = XPCreateWidget(x + 75, y - 390, x + 75 + 125, y - 405, 1, "Evening Glow", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_EVENING_GLOW], xpProperty_ButtonType, xpPushButton);
             
             // restore margin
             x -= 5;
