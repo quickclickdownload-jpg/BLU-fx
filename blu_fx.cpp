@@ -1409,7 +1409,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
         if (settingsWidget == NULL)
         {
             // create settings widget
-            int x = 10, y = 0, w = 580, h = 980;  // Adjusted height to fit all 12 new presets + About section
+            int x = 10, y = 0, w = 580, h = 1050;  // Increased to 1050px for proper layout with all sections
             
             // get screen bounds:
             int screenLeft = 0, screenTop = 0, screenRight = 0, screenBottom = 0;
@@ -1791,7 +1791,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             XPSetWidgetProperty(presetButtons[PRESET_EVENING_GLOW], xpProperty_ButtonType, xpPushButton);
 
             x -= BUTTON_INSET; x2 += BUTTON_INSET;  // re-expand to normal width as we continue
-            y = top - 665;  // move right after Evening Glow preset
+            y = top - 675;  // position after all 12 presets with 10px gap
 
             // Restore left/right margin from whole section above:
             x -= 3;
@@ -1801,7 +1801,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             if (LEGACY_FEATURES) {
                 
                 // add raleigh scale sub window
-                XPCreateWidget(x + 10, y - 600, x2 - 10, y - 650 - 10, 1, "Raleigh Scale:", 0, settingsWidget, xpWidgetClass_SubWindow);
+                XPCreateWidget(x + 10, y - 5, x2 - 10, y - 65 - 10, 1, "Raleigh Scale:", 0, settingsWidget, xpWidgetClass_SubWindow);
 
                 // Add small left/right margin for the inner text:
                 x += 2;
@@ -1810,38 +1810,38 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
                 y += 4; // tighter gutter than what the original author designed
 
                 // add raleigh scale caption
-                XPCreateWidget(x + 10, y - 605, x2 - 20, y - 620, 1, "Raleigh Scale:", 0, settingsWidget, xpWidgetClass_Caption);
+                XPCreateWidget(x + 10, y - 10, x2 - 20, y - 25, 1, "Raleigh Scale:", 0, settingsWidget, xpWidgetClass_Caption);
 
-                y += 10;
+                y -= 10;
                 
                 // add raleigh scale caption
                 char stringRaleighScale[32];
                 snprintf(stringRaleighScale, 32, "Raleigh Scale: %.0f", raleighScale);
-                raleighScaleCaption = XPCreateWidget(x + 30, y - 630, x2 - 50, y - 645, 1, stringRaleighScale, 0, settingsWidget, xpWidgetClass_Caption);
+                raleighScaleCaption = XPCreateWidget(x + 30, y - 30, x2 - 50, y - 45, 1, stringRaleighScale, 0, settingsWidget, xpWidgetClass_Caption);
 
                 // add raleigh scale slider
-                raleighScaleSlider = XPCreateWidget(x + 195, y - 630, x2 - 15, y - 645, 1, "Raleigh Scale", 0, settingsWidget, xpWidgetClass_ScrollBar);
+                raleighScaleSlider = XPCreateWidget(x + 195, y - 30, x2 - 15, y - 45, 1, "Raleigh Scale", 0, settingsWidget, xpWidgetClass_ScrollBar);
                 XPSetWidgetProperty(raleighScaleSlider, xpProperty_ScrollBarMin, 1);
                 XPSetWidgetProperty(raleighScaleSlider, xpProperty_ScrollBarMax, 100);
                 
-                y += 10;
+                y -= 10;
 
                 // add raleigh scale reset button
-                resetRaleighScaleButton = XPCreateWidget(x + 30, y - 660, x + 30 + 80, y - 675, 1, "Reset", 0, settingsWidget, xpWidgetClass_Button);
+                resetRaleighScaleButton = XPCreateWidget(x + 30, y - 35, x + 30 + 80, y - 50, 1, "Reset", 0, settingsWidget, xpWidgetClass_Button);
                 XPSetWidgetProperty(resetRaleighScaleButton, xpProperty_ButtonType, xpPushButton);
                 
                 // Restore left/right margin:
                 x -= 2;
                 x2 += 2;
-                y -= 4; // offset adjustment for gutter above
+                y -= 20;  // account for Raleigh section height
             }
             else {
-                y += 81;    // shift origin up to account for now-missing section
+                y -= 70;    // skip Raleigh section, move to FPS-Limiter
             }
             
             // add fps-limiter sub window
-            y -= 10;  // minimal gap before FPS-Limiter
-            XPCreateWidget(x + 10, y - 5, x2 - 10, y - 55 - 10, 1, "FPS-Limiter:", 0, settingsWidget, xpWidgetClass_SubWindow);
+            y -= 10;  // gap before FPS-Limiter
+            XPCreateWidget(x + 10, y - 5, x2 - 10, y - 65 - 10, 1, "FPS-Limiter:", 0, settingsWidget, xpWidgetClass_SubWindow);
             
             // Add small left/right margin for the inner text:
             x += 2;
@@ -1873,7 +1873,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
 
             // add auto disable enable cinema verite sub window
             y -= 5;  // minimal gap before Cinema Verite
-            XPCreateWidget(x + 10, y - 5, x2 - 10, y - 55 - 10, 1, "Auto disable / enable Cinema Verite:", 0, settingsWidget, xpWidgetClass_SubWindow);
+            XPCreateWidget(x + 10, y - 5, x2 - 10, y - 65 - 10, 1, "Auto disable / enable Cinema Verite:", 0, settingsWidget, xpWidgetClass_SubWindow);
             
             // Add small left/right margin for the inner text:
             x += 2;
@@ -1901,11 +1901,11 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             x -= 2;
             x2 += 2;
 
-            // Position About section with proper spacing (adjusted for 920px window)
-            y -= 8;        // add final gap before About section
+            // Position About section with proper spacing (adjusted for 1050px window)
+            y -= 80;        // move past Cinema Verite section (65px + 15px gap)
             
-            // add about sub window (73 pixels tall)
-            XPCreateWidget(x + 10, y - 5, x2 - 10, y - 78, 1, "About:", 0, settingsWidget, xpWidgetClass_SubWindow);
+            // add about sub window (80 pixels tall)
+            XPCreateWidget(x + 10, y - 5, x2 - 10, y - 80, 1, "About:", 0, settingsWidget, xpWidgetClass_SubWindow);
             
             // Add small left/right margin for the inner text:
             x += 2;
@@ -1917,7 +1917,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             x2 -= 20;
             XPCreateWidget(x + 10, y - 25, x2 - 20, y - 40, 1, "Thank you for using " NAME ", created by Matteo Hausner,", 0, settingsWidget, xpWidgetClass_Caption);
             XPCreateWidget(x + 10, y - 40, x2 - 20, y - 55, 1, "with updates and new features by Steve Goldberg", 0, settingsWidget, xpWidgetClass_Caption);
-            XPCreateWidget(x + 10, y - 55, x2 - 20, y - 70, 1, "(PM @slgoldberg on x-plane.org).", 0, settingsWidget, xpWidgetClass_Caption);
+            XPCreateWidget(x + 10, y - 55, x2 - 20, y - 75, 1, "(PM @slgoldberg on x-plane.org).", 0, settingsWidget, xpWidgetClass_Caption);
             x -= 20;    // restore extra inset
             x2 += 20;
             
