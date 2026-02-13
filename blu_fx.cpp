@@ -1413,7 +1413,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
         if (settingsWidget == NULL)
         {
             // create settings widget
-            int x = 10, y = 0, w = 370, h = 900;
+            int x = 10, y = 0, w = 500, h = 900;
             
             // get screen bounds:
             int screenLeft = 0, screenTop = 0, screenRight = 0, screenBottom = 0;
@@ -1733,7 +1733,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             y = top;
             
             // add vivid preset button
-            int x_col3 = x + 250;  // third column offset
+            int x_col3 = x + 165;  // third column offset (middle column)
             int x_col3_end = x_col3 + 125;
             
             presetButtons[PRESET_VIVID] = XPCreateWidget(x_col3, y - 360, x_col3_end, y - 375, 1, "Vivid", 0, settingsWidget, xpWidgetClass_Button);
