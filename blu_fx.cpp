@@ -670,10 +670,6 @@ BLUfxPreset BLUfxPresets [PRESET_MAX] =
         DEFAULT_RALEIGH_SCALE, // raleigh scale
         DEFAULT_MAX_FRAME_RATE, // default frame rate
         DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
-        0.55f, // vignette
-        DEFAULT_RALEIGH_SCALE, // raleigh scale
-        DEFAULT_MAX_FRAME_RATE, // default frame rate
-        DEFAULT_DISABLE_CINEMA_VERITE_TIME, // default CV disable time
     }
 };
 
