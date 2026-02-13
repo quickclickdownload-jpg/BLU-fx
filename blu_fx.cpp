@@ -1409,7 +1409,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
         if (settingsWidget == NULL)
         {
             // create settings widget
-            int x = 10, y = 0, w = 580, h = 800;  // Further reduced height to eliminate blank spaces
+            int x = 10, y = 0, w = 580, h = 920;  // Adjusted height to fit all presets and controls with minimal gaps
             
             // get screen bounds:
             int screenLeft = 0, screenTop = 0, screenRight = 0, screenBottom = 0;
@@ -1840,28 +1840,28 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             }
             
             // add fps-limiter sub window
-            y -= 5;  // tighten gap before FPS-Limiter
-            XPCreateWidget(x + 10, y - 35, x2 - 10, y - 85 - 10, 1, "FPS-Limiter:", 0, settingsWidget, xpWidgetClass_SubWindow);
+            y -= 10;  // minimal gap before FPS-Limiter
+            XPCreateWidget(x + 10, y - 5, x2 - 10, y - 55 - 10, 1, "FPS-Limiter:", 0, settingsWidget, xpWidgetClass_SubWindow);
             
             // Add small left/right margin for the inner text:
             x += 2;
             x2 -= 2;
 
             // add fps-limiter caption
-            XPCreateWidget(x + 10, y - 35, x2 - 20, y - 50, 1, "FPS-Limiter:", 0, settingsWidget, xpWidgetClass_Caption);
+            XPCreateWidget(x + 10, y - 5, x2 - 20, y - 20, 1, "FPS-Limiter:", 0, settingsWidget, xpWidgetClass_Caption);
             
             // add fps-limiter checkbox
-            fpsLimiterCheckbox = XPCreateWidget(x + 20, y - 55, x2 - 20, y - 70, 1, "Enable FPS-Limiter", 0, settingsWidget, xpWidgetClass_Button);
+            fpsLimiterCheckbox = XPCreateWidget(x + 20, y - 25, x2 - 20, y - 40, 1, "Enable FPS-Limiter", 0, settingsWidget, xpWidgetClass_Button);
             XPSetWidgetProperty(fpsLimiterCheckbox, xpProperty_ButtonType, xpRadioButton);
             XPSetWidgetProperty(fpsLimiterCheckbox, xpProperty_ButtonBehavior, xpButtonBehaviorCheckBox);
             
             // add max fps caption
             char stringMaxFps[32];
             snprintf(stringMaxFps, 32, "Max FPS: %.0f", maxFps);
-            maxFpsCaption = XPCreateWidget(x + 30, y - 70, x2 - 50, y - 85, 1, stringMaxFps, 0, settingsWidget, xpWidgetClass_Caption);
+            maxFpsCaption = XPCreateWidget(x + 30, y - 40, x2 - 50, y - 55, 1, stringMaxFps, 0, settingsWidget, xpWidgetClass_Caption);
             
             // add max fps slider
-            maxFpsSlider = XPCreateWidget(x + 195, y - 70, x2 - 15, y - 85, 1, "Max FPS", 0, settingsWidget, xpWidgetClass_ScrollBar);
+            maxFpsSlider = XPCreateWidget(x + 195, y - 40, x2 - 15, y - 55, 1, "Max FPS", 0, settingsWidget, xpWidgetClass_ScrollBar);
             XPSetWidgetProperty(maxFpsSlider, xpProperty_ScrollBarMin, 20);
             XPSetWidgetProperty(maxFpsSlider, xpProperty_ScrollBarMax, 200);
 
@@ -1869,30 +1869,31 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             x -= 2;
             x2 += 2;
             
-            y -= 90;    // position for Cinema Verite section directly below
+            y -= 60;    // position for Cinema Verite section directly below
 
             // add auto disable enable cinema verite sub window
-            XPCreateWidget(x + 10, y - 20, x2 - 10, y - 70 - 10, 1, "Auto disable / enable Cinema Verite:", 0, settingsWidget, xpWidgetClass_SubWindow);
+            y -= 5;  // minimal gap before Cinema Verite
+            XPCreateWidget(x + 10, y - 5, x2 - 10, y - 55 - 10, 1, "Auto disable / enable Cinema Verite:", 0, settingsWidget, xpWidgetClass_SubWindow);
             
             // Add small left/right margin for the inner text:
             x += 2;
             x2 -= 2;
 
             // add auto disable enable cinema verite caption
-            XPCreateWidget(x + 10, y - 20, x2 - 20, y - 35, 1, "Auto disable / enable Cinema Verite:", 0, settingsWidget, xpWidgetClass_Caption);
+            XPCreateWidget(x + 10, y - 5, x2 - 20, y - 20, 1, "Auto disable / enable Cinema Verite:", 0, settingsWidget, xpWidgetClass_Caption);
                         
             // add control cinema verite checkbox
-            controlCinemaVeriteCheckbox = XPCreateWidget(x + 20, y - 50, x2 - 20, y - 65, 1, "Control Cinema Verite", 0, settingsWidget, xpWidgetClass_Button);
+            controlCinemaVeriteCheckbox = XPCreateWidget(x + 20, y - 25, x2 - 20, y - 40, 1, "Control Cinema Verite", 0, settingsWidget, xpWidgetClass_Button);
             XPSetWidgetProperty(controlCinemaVeriteCheckbox, xpProperty_ButtonType, xpRadioButton);
             XPSetWidgetProperty(controlCinemaVeriteCheckbox, xpProperty_ButtonBehavior, xpButtonBehaviorCheckBox);
             
             // add disable cinema verite time caption
             char stringDisableCinemaVeriteTime[32];
             snprintf(stringDisableCinemaVeriteTime, 32, "On input disable for: %.0f sec", disableCinemaVeriteTime);
-            disableCinemaVeriteTimeCaption = XPCreateWidget(x + 30, y - 70, x2 - 50, y - 85, 1, stringDisableCinemaVeriteTime, 0, settingsWidget, xpWidgetClass_Caption);
+            disableCinemaVeriteTimeCaption = XPCreateWidget(x + 30, y - 40, x2 - 50, y - 55, 1, stringDisableCinemaVeriteTime, 0, settingsWidget, xpWidgetClass_Caption);
             
             // add disable cinema verite time slider
-            disableCinemaVeriteTimeSlider = XPCreateWidget(x + 195, y - 70, x2 - 15, y - 85, 1, "Disable Cinema Verite Timer", 0, settingsWidget, xpWidgetClass_ScrollBar);
+            disableCinemaVeriteTimeSlider = XPCreateWidget(x + 195, y - 40, x2 - 15, y - 55, 1, "Disable Cinema Verite Timer", 0, settingsWidget, xpWidgetClass_ScrollBar);
             XPSetWidgetProperty(disableCinemaVeriteTimeSlider, xpProperty_ScrollBarMin, 1);
             XPSetWidgetProperty(disableCinemaVeriteTimeSlider, xpProperty_ScrollBarMax, 30);
             
