@@ -1409,7 +1409,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
         if (settingsWidget == NULL)
         {
             // create settings widget
-            int x = 10, y = 0, w = 580, h = 920;  // Adjusted height to fit all presets and controls with minimal gaps
+            int x = 10, y = 0, w = 580, h = 980;  // Adjusted height to fit all 12 new presets + About section
             
             // get screen bounds:
             int screenLeft = 0, screenTop = 0, screenRight = 0, screenBottom = 0;
@@ -1901,24 +1901,23 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             x -= 2;
             x2 += 2;
 
-            y += 36;        // final adjustment for compressed CV section to footer below (for consistency)
+            // Position About section with proper spacing (adjusted for 920px window)
+            y -= 8;        // add final gap before About section
             
-            // add about sub window
-            XPCreateWidget(x + 10, y - 900, x2 - 10, y - 957 - 16, 1, "About:", 0, settingsWidget, xpWidgetClass_SubWindow);
+            // add about sub window (73 pixels tall)
+            XPCreateWidget(x + 10, y - 5, x2 - 10, y - 78, 1, "About:", 0, settingsWidget, xpWidgetClass_SubWindow);
             
             // Add small left/right margin for the inner text:
             x += 2;
             x2 -= 2;
             
             // add about caption
-            y -= 2; // give a little gutter to center vertically within sub-window
-            XPCreateWidget(x + 10, y - 900, x2 - 20, y - 915, 1, "About " NAME " " VERSION ":", 0, settingsWidget, xpWidgetClass_Caption);
-            y -= 2; // ditto for the "body"
+            XPCreateWidget(x + 10, y - 5, x2 - 20, y - 20, 1, "About " NAME " " VERSION ":", 0, settingsWidget, xpWidgetClass_Caption);
             x += 20;
             x2 -= 20;
-            XPCreateWidget(x + 10, y - 915, x2 - 20, y - 930, 1, "Thank you for using " NAME ", created by Matteo Hausner,", 0, settingsWidget, xpWidgetClass_Caption);
-            XPCreateWidget(x + 10, y - 930, x2 - 20, y - 945, 1, "with updates and new features by Steve Goldberg", 0, settingsWidget, xpWidgetClass_Caption);
-            XPCreateWidget(x + 10, y - 945, x2 - 20, y - 960, 1, "(PM @slgoldberg on x-plane.org).", 0, settingsWidget, xpWidgetClass_Caption);
+            XPCreateWidget(x + 10, y - 25, x2 - 20, y - 40, 1, "Thank you for using " NAME ", created by Matteo Hausner,", 0, settingsWidget, xpWidgetClass_Caption);
+            XPCreateWidget(x + 10, y - 40, x2 - 20, y - 55, 1, "with updates and new features by Steve Goldberg", 0, settingsWidget, xpWidgetClass_Caption);
+            XPCreateWidget(x + 10, y - 55, x2 - 20, y - 70, 1, "(PM @slgoldberg on x-plane.org).", 0, settingsWidget, xpWidgetClass_Caption);
             x -= 20;    // restore extra inset
             x2 += 20;
             
