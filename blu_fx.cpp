@@ -1409,7 +1409,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
         if (settingsWidget == NULL)
         {
             // create settings widget
-            int x = 10, y = 0, w = 580, h = 1050;
+            int x = 10, y = 0, w = 580, h = 1150;
             
             // get screen bounds:
             int screenLeft = 0, screenTop = 0, screenRight = 0, screenBottom = 0;
@@ -1774,6 +1774,21 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             // add evening light preset button
             presetButtons[PRESET_EVENING_LIGHT] = XPCreateWidget(x_col3, y - 560, x_col3_end, y - 575, 1, "Evening Light", 0, settingsWidget, xpWidgetClass_Button);
             XPSetWidgetProperty(presetButtons[PRESET_EVENING_LIGHT], xpProperty_ButtonType, xpPushButton);
+            y += 2;
+            
+            // add enhanced clear preset button (continued in middle column)
+            presetButtons[PRESET_ENHANCED_CLEAR] = XPCreateWidget(x_col3, y - 585, x_col3_end, y - 600, 1, "Enhanced Clear", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_ENHANCED_CLEAR], xpProperty_ButtonType, xpPushButton);
+            y += 2;
+            
+            // add natural plus preset button (continued in middle column)
+            presetButtons[PRESET_NATURAL_PLUS] = XPCreateWidget(x_col3, y - 610, x_col3_end, y - 625, 1, "Natural Plus", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_NATURAL_PLUS], xpProperty_ButtonType, xpPushButton);
+            y += 2;
+            
+            // add evening glow preset button (continued in middle column)
+            presetButtons[PRESET_EVENING_GLOW] = XPCreateWidget(x_col3, y - 635, x_col3_end, y - 650, 1, "Evening Glow", 0, settingsWidget, xpWidgetClass_Button);
+            XPSetWidgetProperty(presetButtons[PRESET_EVENING_GLOW], xpProperty_ButtonType, xpPushButton);
 
             x -= BUTTON_INSET; x2 += BUTTON_INSET;  // re-expand to normal width as we continue
             y = top + 30;
@@ -1781,31 +1796,6 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             // Restore left/right margin from whole section above:
             x -= 3;
             x2 += 3;
-            
-            // additional presets section for remaining new presets
-            y += 120;  // increased spacing below the three-column preset grid to prevent overlap
-            
-            XPCreateWidget(x + 10, y - 330, x2 - 10, y - 380 - 10, 1, "Additional Presets:", 0, settingsWidget, xpWidgetClass_SubWindow);
-            
-            // add small left/right margin for inner content
-            x += 5;
-            x2 -= 5;
-            
-            // add enhanced clear preset button
-            presetButtons[PRESET_ENHANCED_CLEAR] = XPCreateWidget(x + 20, y - 360, x + 20 + 125, y - 375, 1, "Enhanced Clear", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_ENHANCED_CLEAR], xpProperty_ButtonType, xpPushButton);
-            
-            // add natural plus preset button
-            presetButtons[PRESET_NATURAL_PLUS] = XPCreateWidget(x2 - 20 - 125, y - 360, x2 - 20, y - 375, 1, "Natural Plus", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_NATURAL_PLUS], xpProperty_ButtonType, xpPushButton);
-            
-            // add evening glow preset button (centered below)
-            presetButtons[PRESET_EVENING_GLOW] = XPCreateWidget(x + 75, y - 390, x + 75 + 125, y - 405, 1, "Evening Glow", 0, settingsWidget, xpWidgetClass_Button);
-            XPSetWidgetProperty(presetButtons[PRESET_EVENING_GLOW], xpProperty_ButtonType, xpPushButton);
-            
-            // restore margin
-            x -= 5;
-            x2 += 5;
 
             // Only show raleigh scale slider in versions prior to XP12:
             if (LEGACY_FEATURES) {
