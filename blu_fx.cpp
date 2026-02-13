@@ -1445,7 +1445,7 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             
             // add post-processing sub window
             y += 9;
-            XPCreateWidget(x + 10, y - 30, x2 - 10, y - 516 - 10, 1, "Post-Processing Settings:", 0, settingsWidget, xpWidgetClass_SubWindow);
+            XPCreateWidget(x + 10, y - 30, x2 - 10, y - 800 - 10, 1, "Post-Processing Settings:", 0, settingsWidget, xpWidgetClass_SubWindow);
 
             // Add small left/right margin for inner content:
             x += 3;
@@ -1724,12 +1724,12 @@ void MenuHandlerCallback(void *inMenuRef, void *inItemRef)
             presetButtons[PRESET_MONOCHROME] = XPCreateWidget(x2 - 20 - 125, y - 560, x2 - 20, y - 575, 1, "Monochrome", 0, settingsWidget, xpWidgetClass_Button);
             XPSetWidgetProperty(presetButtons[PRESET_MONOCHROME], xpProperty_ButtonType, xpPushButton);
 
-            // third preset button column (new presets)
+            // third preset button column (new presets) - centered between columns 1 and 2
             
             y = top;
             
             // add clear day preset button
-            int x_col3 = x + 165;  // third column offset (middle column)
+            int x_col3 = x + 195;  // third column offset - adjusted for better spacing
             int x_col3_end = x_col3 + 125;
             
             presetButtons[PRESET_CLEAR_DAY] = XPCreateWidget(x_col3, y - 360, x_col3_end, y - 375, 1, "Clear Day", 0, settingsWidget, xpWidgetClass_Button);
